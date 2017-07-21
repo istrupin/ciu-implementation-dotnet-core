@@ -1,0 +1,6 @@
+c:\Code\ciu-implementation\implementation\bin\Debug\netstandard1.4\implementation.deps.json
+c:\Code\ciu-implementation\implementation\bin\Debug\netstandard1.4\implementation.dll
+c:\Code\ciu-implementation\implementation\bin\Debug\netstandard1.4\implementation.pdb
+c:\Code\ciu-implementation\implementation\obj\Debug\netstandard1.4\implementation.AssemblyInfo.cs
+c:\Code\ciu-implementation\implementation\obj\Debug\netstandard1.4\implementation.dll
+c:\Code\ciu-implementation\implementation\obj\Debug\netstandard1.4\implementation.pdb
