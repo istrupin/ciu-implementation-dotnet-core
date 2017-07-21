@@ -1,6 +1,5 @@
-https://github.com/istrupin/coding-interview-university
 
-# Project Title
+# Coding Interview University Implementation
 
 Implementation of coding examples (data structures, algorithms, etc) from [coding interview university fork][https://github.com/istrupin/coding-interview-university] using C# and dotnet core
 
