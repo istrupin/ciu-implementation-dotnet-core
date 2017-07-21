@@ -5,8 +5,8 @@ Implementation of coding examples (data structures, algorithms, etc) from [codin
 
 ## Getting Started
 
-dotnet restore
-dotnet test
+* dotnet restore
+* dotnet test
 
 ### Prerequisites
 
