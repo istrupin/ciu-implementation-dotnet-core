@@ -49,9 +49,13 @@ public class Vector
 		var oli = _lastIndex;
 		_lastIndex = 0;
 		_capacity++;
-		for (int i = 0; i < oli; i++)
+		for (int i = 0; i <= oli; i++)
 		{
-			if (i != index)
+			if (index > oli)
+			{
+				throw new Exception($"trying to add to non contiguous index : {index}");
+			}
+			else if (i != index)
 			{
 				this.Push(oldArr[i].Value);
 			}
@@ -62,7 +66,7 @@ public class Vector
 		}
 	}
 
-	public int pop()
+	public int Pop()
 	{
 		var retVal = _initialArr[_lastIndex -1];
 		_initialArr[_lastIndex -1] = null;
