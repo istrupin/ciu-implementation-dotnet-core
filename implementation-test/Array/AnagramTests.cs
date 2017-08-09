@@ -13,7 +13,7 @@ namespace implementation_test
         public void ReturnTrueIfStringsAreAnagrams(string left, string right)
         {
             var result = Anagrams.IsAnagram(left, right);
-            Assert.True(result, "${left and right are not anagrams}");
+            Assert.True(result, $"{left} and {right} are not anagrams");
         }
 
         [Theory]        
@@ -21,7 +21,8 @@ namespace implementation_test
         [InlineData("aabbcc", "aabbc")]
         public void ReturnFalseIfStringsAreNotAnagrams(string left, string right)
         {
-
+            var result = Anagrams.IsAnagram(left, right);
+            Assert.False(result, $"{left} and {right} are anagrams");
         }
     }
 }
