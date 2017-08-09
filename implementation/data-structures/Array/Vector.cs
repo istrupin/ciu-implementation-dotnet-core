@@ -2,7 +2,7 @@
 
 namespace Implementation.DataStructures
 {
-public class Vector
+    public class Vector
 {
 	public Vector()
 	{
