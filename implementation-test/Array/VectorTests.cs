@@ -62,6 +62,24 @@ namespace implementation_test
             Assert.Equal(1, _vector.At(1));
             Assert.Equal(9, _vector.At(9));
         }
+
+        [Fact]
+        public void PopItems()
+        {
+            InitializeVector(1);
+            var result = _vector.Pop();
+            Assert.Equal(1,result);
+            Assert.True(_vector.IsEmpty());
+        }
+        [Fact]
+        public void DeleteItem()
+        {
+            InitializeVector(5);
+            _vector.Delete(1);
+            Assert.Equal(1, _vector.At(0));
+            Assert.Equal(3, _vector.At(1));
+            Assert.Equal(5, _vector.At(3));
+        }
     }
 }
 

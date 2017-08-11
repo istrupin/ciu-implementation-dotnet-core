@@ -76,11 +76,11 @@ namespace Implementation.DataStructures
 	public void Delete(int index) 
 	{
 		var oldArr = _initialArr;
-		var oldCapacity = _capacity;
+		var oldLength = Size();
 		_capacity--;
 		_lastIndex = 0;
 		_initialArr = new int?[_capacity];
-		for (int i = 0; i <= oldCapacity ; i++)
+		for (int i = 0; i < oldLength ; i++)
 		{
 			if (i != index)
 			{
