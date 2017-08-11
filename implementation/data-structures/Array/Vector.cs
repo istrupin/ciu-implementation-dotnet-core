@@ -49,13 +49,9 @@ namespace Implementation.DataStructures
 		var oli = _lastIndex;
 		_lastIndex = 0;
 		_capacity++;
-		for (int i = 0; i <= oli; i++)
+		for (int i = 0; i < oli; i++)
 		{
-			if (index > oli)
-			{
-				throw new Exception($"trying to add to non contiguous index : {index}");
-			}
-			else if (i != index)
+			if (i != index)
 			{
 				this.Push(oldArr[i].Value);
 			}
@@ -63,7 +59,6 @@ namespace Implementation.DataStructures
 			{
 				this.Push(item);
 				this.Push(oldArr[i].Value);
-				
 			}
 		}
 	}
