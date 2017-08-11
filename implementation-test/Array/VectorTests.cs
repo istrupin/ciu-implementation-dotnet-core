@@ -6,10 +6,19 @@ namespace implementation_test
 {
     public class Vector_Should
     {
-        private readonly Vector _vector;
+        private Vector _vector;
         public Vector_Should()
         {
             _vector = new Vector();
+            
+        }
+
+        private void InitializeVector(int size)
+        {
+            for (int i = 0; i < size; i++)
+            {
+                _vector.Push(i+1);
+            }
         }
 
         [Fact]
@@ -21,8 +30,39 @@ namespace implementation_test
             Assert.True(_vector.Capacity().Equals(2),"starting capacity is not 2");
             _vector.Push(2);
             _vector.Push(2);
-            
             Assert.True(_vector.Capacity().Equals(4), $"capacity did not double correctly. Capacity: {_vector.Capacity()}");
+        }
+        [Fact]
+        public void CalculateSize()
+        {
+            InitializeVector(9);
+            Assert.Equal(9, _vector.Size());
+        }
+        [Fact]
+        public void CalculateCapacity()
+        {
+            InitializeVector(9);
+            Assert.Equal(16, _vector.Capacity());
+        }
+        [Fact]
+        public void InsertItems()
+        {
+            InitializeVector(9);
+
+            _vector.Insert(4,15);
+            Assert.Equal(15, _vector.At(4));
+            Assert.Equal(5, _vector.At(5));
+            Assert.Equal(9, _vector.At(9));
+        }
+        [Fact]
+        public void PrependItem()
+        {
+            InitializeVector(9);
+            _vector.Prepend(17);
+            Assert.Equal(17, _vector.At(0));
+            Assert.Equal(1, _vector.At(1));
+            Assert.Equal(9, _vector.At(9));
         }
     }
 }
+

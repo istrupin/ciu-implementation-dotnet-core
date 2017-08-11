@@ -58,6 +58,8 @@ namespace Implementation.DataStructures
 			else
 			{
 				this.Push(item);
+				this.Push(oldArr[i].Value);
+				
 			}
 		}
 	}
@@ -69,6 +71,8 @@ namespace Implementation.DataStructures
 		_lastIndex--;
 		return retVal.Value;
 	}
+
+	public void Prepend(int item) => this.Insert(0, item);
 
 	public void Delete(int index) 
 	{
