@@ -80,6 +80,31 @@ namespace implementation_test
             Assert.Equal(3, _vector.At(1));
             Assert.Equal(5, _vector.At(3));
         }
+        [Fact]
+        public void RemoveSingleItem()
+        {
+            InitializeVector(5);
+            _vector.Remove(3);
+            Assert.Equal(4, _vector.Size());
+            Assert.Equal(4, _vector.At(2));
+        }
+        [Fact]
+        public void RemoveMultipleItems()
+        {
+            InitializeVector(3);
+            _vector.Push(2);
+            _vector.Push(2);
+            _vector.Push(3);
+            //{1,2,3,2,2,3}
+            _vector.Remove(2);
+            //{1,3,3}
+            Assert.Equal(3,_vector.At(1));
+            Assert.Equal(3, _vector.Size());
+            _vector.Remove(3);
+            //{1}
+            Assert.Equal(1,_vector.Size());
+            Assert.Equal(1,_vector.At(0));
+        }
     }
 }
 
