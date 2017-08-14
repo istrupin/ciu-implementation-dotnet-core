@@ -10,7 +10,6 @@ namespace implementation_test
         public Vector_Should()
         {
             _vector = new Vector();
-            
         }
 
         private void InitializeVector(int size)

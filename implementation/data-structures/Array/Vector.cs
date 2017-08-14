@@ -88,7 +88,6 @@ namespace Implementation.DataStructures
                     this.Push(oldArr[i].Value);
                 }
             }
-
         }
 
 		public void Remove(int item)
@@ -102,8 +101,6 @@ namespace Implementation.DataStructures
 					Remove(item);
 				}
 			}
-
 		}
-
     }
 }
