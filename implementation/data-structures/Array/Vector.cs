@@ -11,7 +11,7 @@ namespace Implementation.DataStructures
             _capacity = 2;
         }
 
-        public int?[] _initialArr;
+        private int?[] _initialArr;
         private int _lastIndex;
         private int _capacity;
 
