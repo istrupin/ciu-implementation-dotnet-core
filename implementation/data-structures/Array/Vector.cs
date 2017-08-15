@@ -39,7 +39,6 @@ namespace Implementation.DataStructures
             }
         }
 
-        //refactor so that this doesnt always add 1 capacity
         public void Insert(int index, int item)
         {
             if (_capacity < _lastIndex+1)
