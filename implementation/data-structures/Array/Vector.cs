@@ -92,15 +92,28 @@ namespace Implementation.DataStructures
 
 		public void Remove(int item)
 		{
-			var indexesToDelete = new HashSet<int>();
-			for(int i = 0; i <= _lastIndex; i++)
-			{
-				if(_initialArr[i] == item)
-				{
-					this.Delete(i);
-					Remove(item);
-				}
-			}
+            var newLength = 0;
+            for (int i = 0; i < _lastIndex; i++)
+            {
+                if (_initialArr[i] != item)
+                {
+                    newLength++;
+                }
+            }
+            var newArr = new int?[newLength];
+            int addIdx = 0;
+            int newLastIndex = 0;
+            for (int i = 0; i < _lastIndex; i++)
+            {
+                if (_initialArr[i] != item)
+                {
+                    newArr[addIdx] = _initialArr[i];
+                    newLastIndex++;
+                    addIdx++;
+                }
+            }
+            _initialArr = newArr;
+            _lastIndex = newLastIndex;
 		}
     }
 }
