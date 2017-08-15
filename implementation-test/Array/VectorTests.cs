@@ -48,6 +48,7 @@ namespace implementation_test
         {
             InitializeVector(9);
             _vector.Insert(4,15);
+            //{1, 2, 3, 4, 15...}
             Assert.Equal(15, _vector.At(4));
             // Assert.Equal(5, _vector.At(5));
             // Assert.Equal(9, _vector.At(9));
@@ -69,6 +70,19 @@ namespace implementation_test
             var result = _vector.Pop();
             Assert.Equal(1,result);
             Assert.True(_vector.IsEmpty());
+        }
+        [Fact]
+        public void ResizeOnPop()
+        {
+            //Given
+            InitializeVector(8);
+            //When
+            for (int i = 0; i < 6; i++)
+            {
+                _vector.Pop();
+            }
+            //Then
+            Assert.Equal(4, _vector.Capacity());
         }
         [Fact]
         public void DeleteItem()
@@ -103,6 +117,28 @@ namespace implementation_test
             //{1}
             Assert.Equal(1,_vector.Size());
             Assert.Equal(1,_vector.At(0));
+        }
+
+        [Fact]
+        public void FindItemThatExists()
+        {
+            //Given
+            InitializeVector(5);
+            //When
+            int result = _vector.Find(2);
+            //Then
+            Assert.Equal(1, result);
+        }
+
+        [Fact]
+            public void FindItemThatDoesNotExist()
+            {
+            //Given
+            InitializeVector(5);
+            //When
+            int result = _vector.Find(6);
+            //Then
+            Assert.Equal(-1, result);
         }
     }
 }

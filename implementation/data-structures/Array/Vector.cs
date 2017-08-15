@@ -34,10 +34,7 @@ namespace Implementation.DataStructures
             else
             {
                 //double size
-                var newArr = new int?[_capacity * 2];
-                Array.Copy(_initialArr, newArr, _capacity);
-                _initialArr = newArr;
-                _capacity *= 2;
+                Resize(_capacity*2);
                 Push(item);
             }
         }
@@ -45,11 +42,16 @@ namespace Implementation.DataStructures
         //refactor so that this doesnt always add 1 capacity
         public void Insert(int index, int item)
         {
+            if (_capacity < _lastIndex+1)
+            {
+                Resize(_capacity*2);
+            }
             var oldArr = _initialArr;
-            _initialArr = new int?[_capacity + 1];
             var oli = _lastIndex;
+            
+            _initialArr = new int?[_capacity];
             _lastIndex = 0;
-            _capacity++;
+
             for (int i = 0; i < oli; i++)
             {
                 if (i != index)
@@ -69,6 +71,12 @@ namespace Implementation.DataStructures
             var retVal = _initialArr[_lastIndex - 1];
             _initialArr[_lastIndex - 1] = null;
             _lastIndex--;
+
+            if (_lastIndex <= (_capacity/4))
+            {
+                Resize(_capacity/2);
+            }
+
             return retVal.Value;
         }
 
@@ -115,5 +123,31 @@ namespace Implementation.DataStructures
             _initialArr = newArr;
             _lastIndex = newLastIndex;
 		}
+
+        public int Find(int item)
+        {
+            for (int i = 0; i < _initialArr.Length; i++)
+            {
+                if (_initialArr[i] == item )
+                {
+                    return i;
+                }
+            }
+            return -1;
+        }
+
+        private void Resize(int newCapacity)
+        {
+            var newArr = new int? [newCapacity];
+            _capacity = newCapacity;
+            int newLastIndex = 0;
+            for (int i = 0; i < _lastIndex; i++)
+            {
+                newArr[i] = _initialArr[i];
+                newLastIndex++;
+            }
+            _initialArr = newArr;
+            _lastIndex = newLastIndex;
+        }
     }
 }
