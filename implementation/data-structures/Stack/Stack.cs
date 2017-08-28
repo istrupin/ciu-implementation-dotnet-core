@@ -2,10 +2,10 @@ using System;
 
 namespace Implementation.DataStructures
 {
-    public class Stack
+    public class StackI
     {
         private int[] _stk { get; set; }
-        public Stack()
+        public StackI()
         {
             _stk = new int[0];
         }

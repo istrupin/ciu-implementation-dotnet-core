@@ -6,10 +6,10 @@ namespace implementation_test
 {
     public class Stack_should
     {
-        private Stack _stack;
+        private StackI _stack;
         public Stack_should()
         {
-            _stack = new Stack();
+            _stack = new StackI();
         }
         [Fact]
         public void PushItemsCorrectly()
