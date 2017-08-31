@@ -25,11 +25,10 @@ namespace Implementation.DataStructures
                 }
                 else if (Array.IndexOf(_close, item) >= 0)
                 {
-                    if (item == _close[Array.IndexOf(_open,_stk.Peek())])
+                    if (item != _close[Array.IndexOf(_open,_stk.Pop())])
                     {
-                        _stk.Pop();
+                        return false;
                     }
-                    else return false;
                 }
                 else return false;
             }
