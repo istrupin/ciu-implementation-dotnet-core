@@ -40,5 +40,21 @@ namespace implementation_test
             var emptyNode = new Node();
             Assert.True(emptyNode.Empty());
         }
+
+        [Fact]
+        public void FindValueAt()
+        {
+            Assert.Equal(1, node.ValueAt(0));
+            node.PushBack(2);
+            Assert.Equal(2, node.ValueAt(1));
+        }
+
+        [Fact]
+        public void PushFrontItem()
+        {
+            node.PushFront(2);
+            Assert.Equal(2, node.Front().Value);
+            Assert.Equal(1, node.Front().Next.Value);
+        }
     }
 }

@@ -43,5 +43,30 @@ namespace Implementation.DataStructures
         {
             return this.Value == null;
         }
+
+        public int ValueAt(int v)
+        {
+            int i = 0;
+            var cursor = this;
+            while (i != v)
+            {
+                cursor = cursor.Next;
+                i++;
+            }
+            return cursor.Value.GetValueOrDefault();
+        }
+
+        public Node Front()
+        {
+            return this.head;
+        }
+
+        public void PushFront(int v)
+        {
+            head = this;
+            var newNode = new Node(v);
+            newNode.Next = head;
+            head = newNode;
+        }
     }
 }
