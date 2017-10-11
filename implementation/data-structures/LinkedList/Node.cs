@@ -56,9 +56,16 @@ namespace Implementation.DataStructures
             return cursor.Value.GetValueOrDefault();
         }
 
-        public Node Front()
+        public Node Front() => this.head;
+
+        public Node Back()
         {
-            return this.head;
+            var cursor = this;
+            while (cursor.Next != null)
+            {
+                cursor = cursor.Next;
+            }
+            return cursor;
         }
 
         public void PushFront(int v)
@@ -67,6 +74,48 @@ namespace Implementation.DataStructures
             var newNode = new Node(v);
             newNode.Next = head;
             head = newNode;
+        }
+
+        public int? PopFront()
+        {
+            this.head = this.Next == null ? null : this.Next;
+            var retVal = this.Value;
+            this.Value = null;
+            return retVal;
+        }
+
+        public int? PopBack() 
+        {
+            var cursor = this;
+            var behind = this;
+            while (cursor.Next != null)
+            {
+                behind = cursor;
+                cursor = cursor.Next;
+            }
+            behind.Next = null;
+            return cursor.Value;
+        }
+
+        public void Insert(int index, int value)
+        {
+            if (index == 0)
+            {
+                PushFront(value);
+            }
+            else
+            {
+                var cursor = this;
+                var behind = this;
+                var newNode = new Node(value);
+                for (int i = 0; i < index; i++)
+                {
+                    behind = cursor;
+                    cursor = cursor.Next;
+                }
+                behind.Next = newNode;
+                newNode.Next = cursor;
+            }
         }
     }
 }
