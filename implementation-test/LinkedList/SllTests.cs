@@ -110,5 +110,54 @@ namespace implementation_test
             var arr = new int?[]{head.Value, head.Next.Value, head.Next.Next.Value};
             Assert.True(Enumerable.SequenceEqual(arr, new int?[]{1,2,3}));
         }
+
+        [Fact]
+        public void EraseItemInMiddle()
+        {
+            node.PushBack(2);
+            node.PushBack(3);
+            node.Erase(1);
+            var head = node.Front();
+            var arr = new int?[] {head.Value, head.Next.Value};
+            Assert.True(Enumerable.SequenceEqual(arr, new int?[]{1,3}));
+        }
+
+        [Fact]
+        public void EraseItemAtEnd()
+        {
+            node.PushBack(2);
+            node.Erase(1);
+            Assert.Equal(1, node.Front().Value);
+            Assert.Equal(1, node.Back().Value);
+        }
+
+        [Fact]
+        public void ReturnValueNFromEnd()
+        {
+            node.PushBack(2);
+            node.PushBack(3);
+            int val = node.ValueNFromEnd(1);
+            Assert.Equal(2, val);
+        }
+
+        [Fact]
+        public void Reverse()
+        {
+            node.PushBack(2);
+            node.Reverse();
+            var head = node.Front();
+            Assert.Equal(2, head.Value);
+            Assert.Equal(1, head.Next.Value);
+        }
+
+        [Fact]
+        public void RemoveValue()
+        {
+            node.PushBack(2);
+            node.RemoveValue(2);
+            Assert.Equal(1, node.Front().Value);
+            Assert.Equal(1, node.Back().Value);
+            
+        }
     }
 }

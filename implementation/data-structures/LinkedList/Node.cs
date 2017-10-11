@@ -18,6 +18,7 @@ namespace Implementation.DataStructures
         }
         public void PushBack(int value) 
         {
+            head = head ?? this;
             head = this;
             var cursor = this;
             while (cursor.Next != null)
@@ -46,8 +47,9 @@ namespace Implementation.DataStructures
 
         public int ValueAt(int v)
         {
+            var head = this;
             int i = 0;
-            var cursor = this;
+            var cursor = head;
             while (i != v)
             {
                 cursor = cursor.Next;
@@ -70,7 +72,7 @@ namespace Implementation.DataStructures
 
         public void PushFront(int v)
         {
-            head = this;
+            head = head ?? this;
             var newNode = new Node(v);
             newNode.Next = head;
             head = newNode;
@@ -116,6 +118,52 @@ namespace Implementation.DataStructures
                 behind.Next = newNode;
                 newNode.Next = cursor;
             }
+        }
+
+        public void Erase(int index)
+        {
+            if (index == 0)
+            {
+                PopFront();
+            }
+            var cursor = this;
+            var behind = this;
+            for (int i = 0; i < index; i++)
+            {
+                behind = cursor;
+                cursor = cursor.Next;
+            }
+            behind.Next = cursor.Next;
+        }
+
+        public int ValueNFromEnd(int n)
+        {
+            this.Reverse();
+            return ValueAt(n);
+        }
+
+        public void Reverse() 
+        {
+            Stack<int?> stk = new Stack<int?>();
+            var cursor = this;
+            while (cursor != null)
+            {
+                stk.Push(cursor.Value);
+                cursor = cursor.Next;
+            }
+            var newHead = new Node(stk.Pop().Value);
+            cursor = newHead;
+            head = newHead;
+            while (stk.Count > 0)
+            {
+                cursor.Next = new Node(stk.Pop().Value);
+                cursor = cursor.Next;
+            }
+        }
+
+        public void RemoveValue(int v)
+        {
+            
         }
     }
 }
