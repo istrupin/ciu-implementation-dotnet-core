@@ -5,7 +5,7 @@ namespace Implementation.DataStructures
 {
     public class Sll
     {
-        private Node head;
+        public Node head;
         public Sll(int nodeValue)
         {
             this.head = new Node(nodeValue);
@@ -16,9 +16,7 @@ namespace Implementation.DataStructures
         }
         public void PushBack(int value) 
         {
-            head = head ?? this;
-            head = this;
-            var cursor = this;
+            var cursor = head;
             while (cursor.Next != null)
             {
                 cursor = cursor.Next;
@@ -28,7 +26,7 @@ namespace Implementation.DataStructures
 
         public int Size()
         {
-            var cursor = this;
+            var cursor = head;
             int i = 1;
             while (cursor.Next != null)
             {
@@ -40,12 +38,11 @@ namespace Implementation.DataStructures
 
         public bool Empty()
         {
-            return this.Value == null;
+            return head.Value == null;
         }
 
         public int ValueAt(int v)
         {
-            var head = this;
             int i = 0;
             var cursor = head;
             while (i != v)
@@ -60,7 +57,7 @@ namespace Implementation.DataStructures
 
         public Node Back()
         {
-            var cursor = this;
+            var cursor = head;
             while (cursor.Next != null)
             {
                 cursor = cursor.Next;
@@ -70,7 +67,6 @@ namespace Implementation.DataStructures
 
         public void PushFront(int v)
         {
-            head = head ?? this;
             var newNode = new Node(v);
             newNode.Next = head;
             head = newNode;
@@ -78,16 +74,15 @@ namespace Implementation.DataStructures
 
         public int? PopFront()
         {
-            this.head = this.Next == null ? null : this.Next;
-            var retVal = this.Value;
-            this.Value = null;
+            var retVal = this.head.Value;
+            this.head = this.head.Next == null ? null : this.head.Next;
             return retVal;
         }
 
         public int? PopBack() 
         {
-            var cursor = this;
-            var behind = this;
+            var cursor = this.head;
+            var behind = this.head;
             while (cursor.Next != null)
             {
                 behind = cursor;
@@ -105,8 +100,8 @@ namespace Implementation.DataStructures
             }
             else
             {
-                var cursor = this;
-                var behind = this;
+                var cursor = this.head;
+                var behind = this.head;
                 var newNode = new Node(value);
                 for (int i = 0; i < index; i++)
                 {
@@ -124,8 +119,8 @@ namespace Implementation.DataStructures
             {
                 PopFront();
             }
-            var cursor = this;
-            var behind = this;
+            var cursor = this.head;
+            var behind = this.head;
             for (int i = 0; i < index; i++)
             {
                 behind = cursor;
@@ -143,7 +138,7 @@ namespace Implementation.DataStructures
         public void Reverse() 
         {
             Stack<int?> stk = new Stack<int?>();
-            var cursor = this;
+            var cursor = this.head;
             while (cursor != null)
             {
                 stk.Push(cursor.Value);
@@ -161,7 +156,14 @@ namespace Implementation.DataStructures
 
         public void RemoveValue(int v)
         {
-            
+            var cursor = head;
+            var behind = head;
+            while (cursor.Value != v)
+            {
+                behind = cursor;
+                cursor = cursor.Next;
+            }
+            behind.Next = cursor.Next;
         }
     }
 }

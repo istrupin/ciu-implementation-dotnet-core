@@ -6,37 +6,39 @@ namespace implementation_test
 {
     public class SllNode_should
     {
-        private Node node;
+        // private Node node;
+        private Sll sll;
         public SllNode_should()
         {
-            node = new Node(1);
+            // node = new Node(1);
+            sll = new Sll(1);
         }
         [Fact]
         public void CorrectlyConstruct()
         {
-            Assert.Equal(1, node.Value);
-            Assert.Null(node.Next);
+            Assert.Equal(1, sll.head.Value);
+            Assert.Null(sll.head.Next);
         }
         [Fact]
         public void PushBackItems()
         {
-            node.PushBack(2);
-            Assert.NotNull(node.Next);
-            Assert.Equal(2, node.Next.Value);
+            sll.PushBack(2);
+            Assert.NotNull(sll.head.Next);
+            Assert.Equal(2, sll.head.Next.Value);
         }
 
         [Fact]
         public void ReturnSize()
         {
-            Assert.Equal(1, node.Size());
-            node.PushBack(2);
-            Assert.Equal(2, node.Size());
+            Assert.Equal(1, sll.Size());
+            sll.PushBack(2);
+            Assert.Equal(2, sll.Size());
         }
 
         [Fact]
         public void ReturnEmpty()
         {
-            Assert.False(node.Empty());
+            Assert.False(sll.Empty());
             var emptyNode = new Node();
             Assert.True(emptyNode.Empty());
         }
@@ -44,58 +46,58 @@ namespace implementation_test
         [Fact]
         public void FindValueAt()
         {
-            Assert.Equal(1, node.ValueAt(0));
-            node.PushBack(2);
-            Assert.Equal(2, node.ValueAt(1));
+            Assert.Equal(1, sll.ValueAt(0));
+            sll.PushBack(2);
+            Assert.Equal(2, sll.ValueAt(1));
         }
 
         [Fact]
         public void PushFrontItem()
         {
-            node.PushFront(2);
-            Assert.Equal(2, node.Front().Value);
-            Assert.Equal(1, node.Front().Next.Value);
+            sll.PushFront(2);
+            Assert.Equal(2, sll.Front().Value);
+            Assert.Equal(1, sll.Front().Next.Value);
         }
 
         [Fact]
         public void PopFrontLastItem()
         {
-            var popped = node.PopFront();
+            var popped = sll.PopFront();
             Assert.Equal(1, popped);
-            Assert.Null(node.Value);
+            Assert.Null(sll.head);
         }
 
         [Fact] 
         public void PopFrontNotLastItem()
         {
-            node.PushBack(2);
-            var popped = node.PopFront();
+            sll.PushBack(2);
+            var popped = sll.PopFront();
             Assert.Equal(1, popped);
-            Assert.Equal(2,node.Front().Value);
+            Assert.Equal(2,sll.Front().Value);
         }
 
         [Fact]
         public void PopBackItem()
         {
-            node.PushBack(2);
-            var popped = node.PopBack();
+            sll.PushBack(2);
+            var popped = sll.PopBack();
             Assert.Equal(2, popped);
-            Assert.Equal(1, node.Back().Value);
+            Assert.Equal(1, sll.Back().Value);
         }
 
         [Fact]
         public void FindBackItem()
         {
-            Assert.Equal(1, node.Back().Value);
-            node.PushBack(2);
-            Assert.Equal(2, node.Back().Value);
+            Assert.Equal(1, sll.Back().Value);
+            sll.PushBack(2);
+            Assert.Equal(2, sll.Back().Value);
         }
 
         [Fact]
         public void InsertItemInMiddle()
         {
-            node.PushBack(3);
-            var head = node.Front();
+            sll.PushBack(3);
+            var head = sll.Front();
             head.Insert(1,2);
             var arr = new int?[]{head.Value, head.Next.Value, head.Next.Next.Value};
             Assert.True(Enumerable.SequenceEqual(arr, new int?[]{1,2,3}));
@@ -104,9 +106,9 @@ namespace implementation_test
         [Fact]
         public void InsertItemAtEnd()
         {
-            node.PushBack(2);
-            node.Insert(2,3);
-            var head = node.Front();
+            sll.PushBack(2);
+            sll.Insert(2,3);
+            var head = sll.Front();
             var arr = new int?[]{head.Value, head.Next.Value, head.Next.Next.Value};
             Assert.True(Enumerable.SequenceEqual(arr, new int?[]{1,2,3}));
         }
@@ -114,10 +116,10 @@ namespace implementation_test
         [Fact]
         public void EraseItemInMiddle()
         {
-            node.PushBack(2);
-            node.PushBack(3);
-            node.Erase(1);
-            var head = node.Front();
+            sll.PushBack(2);
+            sll.PushBack(3);
+            sll.Erase(1);
+            var head = sll.Front();
             var arr = new int?[] {head.Value, head.Next.Value};
             Assert.True(Enumerable.SequenceEqual(arr, new int?[]{1,3}));
         }
@@ -125,27 +127,27 @@ namespace implementation_test
         [Fact]
         public void EraseItemAtEnd()
         {
-            node.PushBack(2);
-            node.Erase(1);
-            Assert.Equal(1, node.Front().Value);
-            Assert.Equal(1, node.Back().Value);
+            sll.PushBack(2);
+            sll.Erase(1);
+            Assert.Equal(1, sll.Front().Value);
+            Assert.Equal(1, sll.Back().Value);
         }
 
         [Fact]
         public void ReturnValueNFromEnd()
         {
-            node.PushBack(2);
-            node.PushBack(3);
-            int val = node.ValueNFromEnd(1);
+            sll.PushBack(2);
+            sll.PushBack(3);
+            int val = sll.ValueNFromEnd(1);
             Assert.Equal(2, val);
         }
 
         [Fact]
         public void Reverse()
         {
-            node.PushBack(2);
-            node.Reverse();
-            var head = node.Front();
+            sll.PushBack(2);
+            sll.Reverse();
+            var head = sll.Front();
             Assert.Equal(2, head.Value);
             Assert.Equal(1, head.Next.Value);
         }
@@ -153,11 +155,10 @@ namespace implementation_test
         [Fact]
         public void RemoveValue()
         {
-            node.PushBack(2);
-            node.RemoveValue(2);
-            Assert.Equal(1, node.Front().Value);
-            Assert.Equal(1, node.Back().Value);
-            
+            sll.PushBack(2);
+            sll.RemoveValue(2);
+            Assert.Equal(1, sll.Front().Value);
+            Assert.Equal(1, sll.Back().Value);
         }
     }
 }
