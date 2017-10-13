@@ -6,6 +6,8 @@ namespace Implementation.DataStructures
     public class Sll
     {
         public Node head;
+        public Node tail;
+        
         public Sll(int nodeValue)
         {
             this.head = new Node(nodeValue);
@@ -22,6 +24,7 @@ namespace Implementation.DataStructures
                 cursor = cursor.Next;
             }
             cursor.Next = new Node(value);
+            tail = cursor;
         }
 
         public int Size()
@@ -89,6 +92,7 @@ namespace Implementation.DataStructures
                 cursor = cursor.Next;
             }
             behind.Next = null;
+            tail = behind;
             return cursor.Value;
         }
 
@@ -110,6 +114,7 @@ namespace Implementation.DataStructures
                 }
                 behind.Next = newNode;
                 newNode.Next = cursor;
+                tail = FindTail();
             }
         }
 
@@ -127,6 +132,7 @@ namespace Implementation.DataStructures
                 cursor = cursor.Next;
             }
             behind.Next = cursor.Next;
+            tail = FindTail();
         }
 
         public int ValueNFromEnd(int n)
@@ -139,6 +145,7 @@ namespace Implementation.DataStructures
         {
             Stack<int?> stk = new Stack<int?>();
             var cursor = this.head;
+            tail = this.head;
             while (cursor != null)
             {
                 stk.Push(cursor.Value);
@@ -164,6 +171,16 @@ namespace Implementation.DataStructures
                 cursor = cursor.Next;
             }
             behind.Next = cursor.Next;
+            tail = FindTail();
+        }
+        public Node FindTail()
+        {
+            var cursor = head;
+            while (cursor.Next != null)
+            {
+                cursor = cursor.Next;
+            }
+            return cursor;
         }
     }
 }
