@@ -67,7 +67,36 @@ namespace Implementation.DataStructures.HashTable
                 }
                 cursor = cursor.Next;
             }
-            return "does not exist";
+            return null;
+        }
+
+        public bool Exists(int key) 
+        {
+            var bucketIndex = getBucketIndex(key);
+            var bkt = getBucketByIndex(bucketIndex);
+            var exists = false;
+            var cursor = bkt.First;
+            while(cursor != null)
+            {
+                exists = cursor.Value.Key == key;
+                cursor = cursor.Next;
+            }
+            return exists;
+        }
+        
+        public void Remove(int key)
+        {
+            var bucketIndex = getBucketIndex(key);
+            var bkt = getBucketByIndex(bucketIndex);
+            var cursor = bkt.First;
+            while(cursor != null)
+            {
+                if(cursor.Value.Key == key) 
+                {
+                    bkt.Remove(cursor.Value); 
+                }
+                cursor = cursor.Next;
+            }
         }
     }
 }

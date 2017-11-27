@@ -32,5 +32,31 @@ namespace implementation_test
             var res = hTable.Get(1);
             Assert.Equal("won", res);            
         }
+
+        [Fact]
+        public void CorrectlyRemoveItems()
+        {
+            hTable.Add(1, "one");
+            hTable.Add(2, "two");
+            hTable.Remove(1);
+            var res = hTable.Get(1);
+            Assert.Null(res);
+            Assert.Equal("two", hTable.Get(2));
+        }
+
+        [Fact]
+        public void CorrectlyCheckExists()
+        {
+            hTable.Add(1, "one");
+            var res = hTable.Exists(1);
+            Assert.True(res);            
+        }
+        [Fact]
+        public void CorrectlyCheckNotExists()
+        {
+            hTable.Add(1, "one");
+            var res = hTable.Exists(2);
+            Assert.False(res);            
+        }
     }
 }
