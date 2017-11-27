@@ -11,20 +11,32 @@ namespace Implementation.DataStructures
         public Sll(int nodeValue)
         {
             this.head = new Node(nodeValue);
+            this.tail = head;
         }
         public Sll()
         {
-            
+            this.head = new Node();
+            tail = head;
         }
         public void PushBack(int value) 
         {
-            var cursor = head;
-            while (cursor.Next != null)
+            //// Use for without tail poiter
+            // var cursor = head;
+            // while (cursor.Next != null)
+            // {
+            //     cursor = cursor.Next;
+            // }
+            if (head.Empty())
             {
-                cursor = cursor.Next;
+                head = new Node(value);
+                tail = head;
             }
+            else
+            {
+            var cursor = tail;
             cursor.Next = new Node(value);
-            tail = cursor;
+            tail = cursor.Next;
+            }
         }
 
         public int Size()
