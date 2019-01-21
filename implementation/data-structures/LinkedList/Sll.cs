@@ -13,6 +13,12 @@ namespace Implementation.DataStructures
             this.head = new Node(nodeValue);
             this.tail = head;
         }
+
+        public Sll(Node startNode)
+        {
+            this.head = startNode;
+            this.tail = head;
+        }
         public Sll()
         {
             this.head = new Node();
@@ -193,6 +199,22 @@ namespace Implementation.DataStructures
                 cursor = cursor.Next;
             }
             return cursor;
+        }
+
+        public bool IsCircular(){
+            var fastCursor = head;
+            var slowCursor = head;
+
+            while (fastCursor.Next != null && fastCursor.Next.Next != null)
+            {
+                slowCursor = slowCursor.Next;
+                fastCursor = fastCursor.Next.Next;
+                if (slowCursor == fastCursor)
+                {
+                    return true;
+                }
+            }
+            return false;
         }
     }
 }
