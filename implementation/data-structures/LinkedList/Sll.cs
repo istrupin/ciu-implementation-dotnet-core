@@ -161,24 +161,54 @@ namespace Implementation.DataStructures
 
         public void Reverse() 
         {
-            Stack<int?> stk = new Stack<int?>();
+            Stack<Node> stk = new Stack<Node>();
             var cursor = this.head;
             tail = this.head;
             while (cursor != null)
             {
-                stk.Push(cursor.Value);
+                stk.Push(cursor);
                 cursor = cursor.Next;
             }
-            var newHead = new Node(stk.Pop().Value);
+            var newHead = stk.Pop();
             cursor = newHead;
             head = newHead;
             while (stk.Count > 0)
             {
-                cursor.Next = new Node(stk.Pop().Value);
+                cursor.Next = stk.Pop();
                 cursor = cursor.Next;
             }
         }
 
+        public void ReverseIteratively(){
+
+        }
+        public void ReverseRecursively(){
+            this.head = RecursiveReverse(this.head);
+        }
+        
+        private Node RecursiveReverse(Node first, Node previous = null){
+            if(first == null)
+                return null;
+            if (first.Next == null)
+            {
+                //first.Next = previous;
+                return first;
+            }
+                
+            // var rest = first.Next;
+            // first.Next = previous;
+            // var headNode = RecursiveReverse(rest, first);
+            // return headNode;
+
+
+            //
+            var rest = first.Next;
+            first.Next = null;
+            var reversedRest = RecursiveReverse(rest);
+            reversedRest.Next = first;
+            return rest;
+            //
+        }
         public void RemoveValue(int v)
         {
             var cursor = head;
@@ -205,7 +235,7 @@ namespace Implementation.DataStructures
             var fastCursor = head;
             var slowCursor = head;
 
-            while (fastCursor.Next != null && fastCursor.Next.Next != null)
+            while (fastCursor != null && fastCursor.Next != null)
             {
                 slowCursor = slowCursor.Next;
                 fastCursor = fastCursor.Next.Next;

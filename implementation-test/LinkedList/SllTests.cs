@@ -153,6 +153,16 @@ namespace implementation_test
         }
 
         [Fact]
+        public void ReverseRecursively()
+        {
+            sll.PushBack(2);
+            sll.ReverseRecursively();
+            var head = sll.Front();
+            Assert.Equal(2, head.Value);
+            Assert.Equal(1, head.Next.Value);
+        }
+
+        [Fact]
         public void RemoveValue()
         {
             sll.PushBack(2);
