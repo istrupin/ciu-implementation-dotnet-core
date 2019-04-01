@@ -180,7 +180,20 @@ namespace Implementation.DataStructures
         }
 
         public void ReverseIteratively(){
-
+            if (this.head.Next == null)
+                return;
+            
+            var cursor = this.head;
+            Node previous = null;
+            while (cursor.Next != null)
+            {
+                var nextNode = cursor.Next;
+                cursor.Next = previous;
+                previous = cursor;
+                cursor = nextNode;
+            }
+            cursor.Next = previous;
+            head = cursor;
         }
         public void ReverseRecursively(){
             this.head = RecursiveReverse(this.head);
