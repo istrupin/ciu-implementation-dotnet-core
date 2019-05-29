@@ -1,4 +1,4 @@
-namespace implementation.other.cycle_finder
+namespace implementation.other.CycleFinder
 {
     public class Entity
     {

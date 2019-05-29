@@ -2,12 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace implementation.other.cycle_finder
+namespace implementation.other.CycleFinder
 {
     public class CycleFinderService
     {
-        public List<ParentChildRelationship> ParentChildRelationships { get; set; }
-
+        public List<ParentChildRelationship> ParentChildRelationships { get; private set; }
         public CycleFinderService(List<ParentChildRelationship> existingRelationships)
         {
             ParentChildRelationships = existingRelationships;
