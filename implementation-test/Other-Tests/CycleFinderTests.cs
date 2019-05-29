@@ -9,36 +9,36 @@ namespace implementation_test.Other_Tests
 {
     public class CycleFinder_Should
     {
-        private SleeveGroupService sleeveGroupService;
-        private List<SleeveGroup> sleeveGroups;
-        private List<SleeveGroupRelationship> existingRelationships;
+        private CycleFinderService sleeveGroupService;
+        private List<Entity> sleeveGroups;
+        private List<ParentChildRelationship> existingRelationships;
         public CycleFinder_Should()
         {
-            sleeveGroups = new List<SleeveGroup>() { new SleeveGroup(0), new SleeveGroup(1), new SleeveGroup(2), new SleeveGroup(3), new SleeveGroup(4), new SleeveGroup(5) };
-            existingRelationships = new List<SleeveGroupRelationship>()
+            sleeveGroups = new List<Entity>() { new Entity(0), new Entity(1), new Entity(2), new Entity(3), new Entity(4), new Entity(5) };
+            existingRelationships = new List<ParentChildRelationship>()
             {
-                new SleeveGroupRelationship() { Parent = sleeveGroups[0], Child = sleeveGroups[1] },
-                new SleeveGroupRelationship() { Parent = sleeveGroups[0], Child = sleeveGroups[2] },
-                new SleeveGroupRelationship() { Parent = sleeveGroups[2], Child = sleeveGroups[3] },
-                new SleeveGroupRelationship() { Parent = sleeveGroups[1], Child = sleeveGroups[3] },
-                new SleeveGroupRelationship() { Parent = sleeveGroups[1], Child = sleeveGroups[4] },
-                new SleeveGroupRelationship() { Parent = sleeveGroups[1], Child = sleeveGroups[5] }
+                new ParentChildRelationship() { Parent = sleeveGroups[0], Child = sleeveGroups[1] },
+                new ParentChildRelationship() { Parent = sleeveGroups[0], Child = sleeveGroups[2] },
+                new ParentChildRelationship() { Parent = sleeveGroups[2], Child = sleeveGroups[3] },
+                new ParentChildRelationship() { Parent = sleeveGroups[1], Child = sleeveGroups[3] },
+                new ParentChildRelationship() { Parent = sleeveGroups[1], Child = sleeveGroups[4] },
+                new ParentChildRelationship() { Parent = sleeveGroups[1], Child = sleeveGroups[5] }
             };
-            sleeveGroupService = new SleeveGroupService(existingRelationships);
+            sleeveGroupService = new CycleFinderService(existingRelationships);
         }
 
         [Fact]
         public void AddValidItems()
         {
-            sleeveGroupService.AddSleeveGroupRelationship(new SleeveGroupRelationship() { Parent = sleeveGroups[4], Child = sleeveGroups[5] });
-            sleeveGroupService.SleeveGroupRelationships.Count.ShouldBe(7);
-            sleeveGroupService.SleeveGroupRelationships.Last().Parent.ShouldBe(sleeveGroups[4]);
+            sleeveGroupService.AddParentChildRelationship(new ParentChildRelationship() { Parent = sleeveGroups[4], Child = sleeveGroups[5] });
+            sleeveGroupService.ParentChildRelationships.Count.ShouldBe(7);
+            sleeveGroupService.ParentChildRelationships.Last().Parent.ShouldBe(sleeveGroups[4]);
         }
 
         [Fact]
         public void ShouldFailToAddCircularReference()
         {
-            Should.Throw<ArgumentException>(() => sleeveGroupService.AddSleeveGroupRelationship(new SleeveGroupRelationship() { Parent = sleeveGroups[5], Child = sleeveGroups[0] }));
+            Should.Throw<ArgumentException>(() => sleeveGroupService.AddParentChildRelationship(new ParentChildRelationship() { Parent = sleeveGroups[5], Child = sleeveGroups[0] }));
         }
     }
 }

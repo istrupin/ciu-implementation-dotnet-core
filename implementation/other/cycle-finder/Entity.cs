@@ -1,10 +1,10 @@
 namespace implementation.other.cycle_finder
 {
-    public class SleeveGroup
+    public class Entity
     {
         public int Id { get; set; }
 
-        public SleeveGroup(int id)
+        public Entity(int id)
         {
             Id = id;
         }
