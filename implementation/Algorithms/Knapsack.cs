@@ -32,8 +32,8 @@ namespace implementation.Algorithms
             {
                 if (CurrentValueDifferentFromPreviousValue(value, itemIndex, capacityIndex)){
                     yield return itemIndex;
-                    value -= _itemValues[itemIndex - 1];
-                    capacityIndex -= _itemWeights[itemIndex - 1];
+                    value -= GetItemValue(itemIndex);
+                    capacityIndex -= GetItemWeight(itemIndex);
                 }
             }
         }
@@ -70,14 +70,6 @@ namespace implementation.Algorithms
             MaximizedValue = WeightValueMatrix[_itemValues.Length, _capacity];
         }
 
-        // private void TryAddItem(int maxValueWithCurrent, int maxValueWithoutCurrent, int itemIndex)
-        // {
-        //     if (maxValueWithCurrent > maxValueWithoutCurrent)
-        //     {
-        //         SelectedIndexes.Add(itemIndex);
-        //     }
-        // }
-
         private int GetBottomRightCornerOfMatrix() => WeightValueMatrix[WeightValueMatrix.GetLength(0), WeightValueMatrix.GetLength(1)];
 
         //-1 because array is zero based and we are using 1 based for
@@ -92,7 +84,6 @@ namespace implementation.Algorithms
                 throw new Exception("Item values and item weights must be of the same length.");
             }
         }
-
 
     }
 }
