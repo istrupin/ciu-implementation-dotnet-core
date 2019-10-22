@@ -75,7 +75,6 @@ namespace implementation.Algorithms
         //-1 because array is zero based and we are using 1 based for
         private int GetItemWeight(int itemIndex) => _itemWeights[itemIndex - 1];
         private int GetItemValue(int itemIndex) => _itemValues[itemIndex - 1];
-
         private int GetPreviousItemValueForCapacity(int currentItemIndex, int capacity) => WeightValueMatrix[currentItemIndex - 1, capacity];
         private void ValidateParameters(IEnumerable<int> itemValues, IEnumerable<int> itemWeights)
         {

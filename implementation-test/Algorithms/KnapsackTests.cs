@@ -13,65 +13,25 @@ namespace implementation_test.Algorithms
             this.output = output;
         }
 
-        [Fact]
-        public void KnapsackShouldReturnOptimizedValueSimple()
-        {
-            int[] itemValues = new int[] {  30, 50 };
-            int[] itemWeights = new int[] { 3, 2 };
-            int capacity = 5;
-
+        [Theory]
+        [InlineData(new int[] { 10, 40, 30, 50 }, new int[] { 5, 4, 6, 3 },10,  50+40)]
+        [InlineData(new int[] { 30, 50 }, new int[] {  3, 2 }, 5, 80)]
+        public void KnapsackShouldReturnOptimizedValue(int[] itemValues, int[] itemWeights, int capacity, int expected){
             var knapsack = new Knapsack(itemValues, itemWeights, capacity);
             var res = knapsack.MaximizedValue;
-            Assert.Equal(80, res);
+            Assert.Equal(expected,res);
         }
 
-        [Fact]
-        public void KnapsackShouldReturnOptimizedValue(){
-            int[] itemValues = new int[]{ 10, 40, 30, 50  };
-            int[] itemWeights = new int[] { 5, 4, 6, 3 };
-            int capacity = 10;
-            
-            var knapsack = new Knapsack(itemValues, itemWeights, capacity);
-            var res = knapsack.MaximizedValue;
-            Assert.Equal(50+40,res);
-        }
-
-        [Fact]
-        public void KnapsackShouldReturnOptimizedSet()
+        [Theory]
+        [InlineData(new int[] { 10, 40, 30, 50 },new int[] { 5, 4, 6, 3 }, 10, new int[]{2,4} )]
+        [InlineData(new int[] { 40, 100, 50, 60 }, new int[] {20, 10, 40, 30 }, 60, new int[] { 1, 2, 4 })]
+        [InlineData(new int[] { 60, 100, 120 }, new int[] { 10, 20, 30 }, 50, new int[] { 2,3 })]
+        public void KnapsackShouldReturnOptimizedSet(int[] itemValues, int[] itemWeights, int capacity, int[] expected)
         {
-            int[] itemValues = new int[] { 10, 40, 30, 50 };
-            int[] itemWeights = new int[] { 5, 4, 6, 3 };
-            int capacity = 10;
-
             var knapsack = new Knapsack(itemValues, itemWeights, capacity);
             var res = knapsack.GetSelectedItems().OrderBy(x => x);
-            Assert.Equal(new[]{2,4}.OrderBy(x => x),res);
+            Assert.Equal(expected,res);
         }
-
-        [Fact]
-        public void KnapsackShouldReturnOptimizedSet2()
-        {
-            int[] itemValues = new int[] { 40, 100, 50, 60 };
-            int[] itemWeights = new int[] { 20, 10, 40, 30 };
-            int capacity = 60;
-
-            var knapsack = new Knapsack(itemValues, itemWeights, capacity);
-            var res = knapsack.GetSelectedItems().OrderBy(x => x);
-            Assert.Equal(new[] { 1, 2, 4  }.OrderBy(x => x), res);
-        }
-
-        [Fact]
-        public void KnapsackShouldReturnOptimizedSet3()
-        {
-            int[] itemValues = new int[] { 60, 100, 120 };
-            int[] itemWeights = new int[] { 10, 20, 30 };
-            int capacity = 50;
-
-            var knapsack = new Knapsack(itemValues, itemWeights, capacity);
-            var res = knapsack.GetSelectedItems().OrderBy(x => x);
-            Assert.Equal(new[] {  2, 3 }.OrderBy(x => x), res);
-        }
-
 
     }
 }
