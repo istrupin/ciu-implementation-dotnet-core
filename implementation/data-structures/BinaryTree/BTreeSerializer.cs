@@ -61,10 +61,6 @@ namespace Implementation.DataStructures.BinaryTree
                 {
                     nodeQueue.Enqueue(right);
                 }
-                // if(root == null)
-                // {
-                //     root = currentNode;
-                // }
             }
             return root;
 
