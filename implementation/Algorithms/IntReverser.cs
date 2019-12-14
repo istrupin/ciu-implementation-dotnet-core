@@ -33,7 +33,7 @@ namespace implementation.Algorithms
             {
 
                 var intVal = Convert.ToInt32(sb.ToString() == string.Empty ? "0" : sb.ToString()) * multiplier;
-                if ((intVal) > (int.MaxValue / 10) || (intVal) < (int.MinValue / 10))
+                if ((intVal) > (int.MaxValue / 10) || (intVal) < (int.MinValue / 10) ||(intVal == int.MaxValue && (popped > 7 || popped < -8)))
                     return 0;
                 sb.Append(popped);
             }
